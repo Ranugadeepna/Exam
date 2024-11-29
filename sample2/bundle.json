@@ -1,0 +1,33 @@
+{
+    "id": "ebd5609c-b712-4eb7-bf00-31173e4db3a0",
+    "author": "",
+    "widgets": [
+        {
+            "id": "sample2",
+            "name": "sample2",
+            "description": "A sample widget",
+            "icon": "",
+            "tags":[],
+            "category":"",
+            "isTemplate": false
+        },
+        {
+            "id": "srchart",
+            "name": "srchart",
+            "description": "Another chart widget",
+            "icon": "",
+            "tags":[],
+            "category":"",
+            "isTemplate": false
+        }
+    ],
+    "sidebarLinks": [
+        
+    ],
+    "uis": [
+       
+    ],
+    "menuItems": [
+        
+    ]
+}

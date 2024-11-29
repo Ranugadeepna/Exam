@@ -1,0 +1,33 @@
+.sample2-widget-container{
+    position: relative;
+// padding-top: 80px;
+
+.uxp-widget-title-bar {
+    &.sr-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    
+}
+
+.sr-item {
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
+
+    .item {
+        width: 33%;
+    }
+}
+
+}
