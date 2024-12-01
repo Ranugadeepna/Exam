@@ -11,7 +11,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, ".sample2-widget-container {\n  position: relative;\n}\n.sample2-widget-container .uxp-widget-title-bar.sr-header {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n}\n.sample2-widget-container .container {\n  width: 100%;\n  height: 100%;\n}\n.sample2-widget-container .sr-item {\n  width: 100%;\n  height: auto;\n  display: flex;\n  padding: 5px;\n  align-items: center;\n  justify-content: space-between;\n}\n.sample2-widget-container .sr-item .item {\n  width: 33%;\n}", ""]);
+exports.push([module.id, ".sample2-widget-container {\n  position: relative;\n}\n.sample2-widget-container .uxp-widget-title-bar.sr-header {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n}\n.sample2-widget-container .container {\n  width: 100%;\n  height: 100%;\n}\n.sample2-widget-container .sr-item {\n  width: 100%;\n  height: auto;\n  display: flex;\n  padding: 5px;\n  align-items: center;\n  justify-content: space-between;\n}\n.sample2-widget-container .sr-item .item {\n  width: 33%;\n}\n\n.container-widget-ebd5609c-b712-4eb7-bf00-31173e4db3a0 {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  background-color: #f9f9f9; /* Light gray background */\n  border: 1px solid #ddd; /* Subtle border */\n  border-radius: 10px; /* Rounded corners */\n  padding: 20px; /* Spacing inside the container */\n  width: 300px; /* Set a fixed width */\n  margin: 20px auto; /* Center the container */\n  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */\n}\n\nh1 {\n  font-family: \"Arial\", sans-serif; /* Clean font */\n  font-size: 24px; /* Adjust font size */\n  font-weight: bold; /* Make the text bold */\n  color: #333; /* Dark text for contrast */\n  margin-bottom: 10px; /* Space between the heading and content */\n  text-align: center; /* Center the text */\n}\n\n.total-count {\n  font-family: \"Courier New\", Courier, monospace; /* Unique monospace font */\n  font-size: 32px; /* Larger font size for emphasis */\n  font-weight: bold; /* Emphasize the count */\n  color: #007BFF; /* Bright blue for emphasis */\n  background-color: #e7f3ff; /* Light blue background for contrast */\n  padding: 10px 20px; /* Padding around the count */\n  border-radius: 5px; /* Slightly rounded corners */\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */\n  text-align: center; /* Center the text */\n  margin-top: 10px; /* Space above the count */\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -476,7 +476,7 @@ const components_1 = __webpack_require__(/*! uxp/components */ "uxp/components")
 const recharts_1 = __webpack_require__(/*! recharts */ "recharts");
 __webpack_require__(/*! ./styles.scss */ "./src/styles.scss");
 const Sample2Widget = (props) => {
-    let [data, setData] = React.useState([]);
+    // let [data,setData] =React.useState([])
     // let data=[
     //     { id: 1, name: 'John Doe',city:'norve' },
     //     { id: 2, name: 'Jane Doe',city:'oslo' },
@@ -486,19 +486,19 @@ const Sample2Widget = (props) => {
     //     { id: 6, name: 'Sophia Doe',city:'tokyo' },
     //     { id: 7, name: 'Ava Doe',city:'madrid' },
     // ];
-    React.useEffect(() => {
-        // getData();
-    }, []);
+    // React.useEffect(() => {
+    //     // getData();
+    // }, []);
     function getData(max, lastToken) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((done, nope) => {
                 let last = 0;
                 if (lastToken)
                     last = Number(lastToken);
-                props.uxpContext.executeAction("Exam-Test-Model", "getdata", {}, { json: true })
-                    .then(res => {
-                    // setData(res.result);
-                    done({ items: res.result, pageToken: (last + res.result.length).toString() });
+                props.uxpContext.executeAction("Exam-Test-Model", "getdata", { max: max, last: last }, { json: true })
+                    .then(response => {
+                    done({ items: response.result2, pageToken: (last + response.result2.length).toString() });
+                    console.log(response.result.length);
                 })
                     .catch(e => {
                     console.log(e);
@@ -518,7 +518,7 @@ const Sample2Widget = (props) => {
         React.createElement(components_1.TitleBar, { title: 'Sample2' },
             React.createElement(components_1.FilterPanel, null)),
         React.createElement("div", { className: "container" },
-            React.createElement(components_1.DataList, { data: getData, renderItem: renderItem, pageSize: 10 }))));
+            React.createElement(components_1.DataList, { data: getData, renderItem: renderItem, pageSize: 20 }))));
 };
 //pichart
 const SRChartWidget = (props) => {
@@ -586,6 +586,29 @@ const SRChartWidget = (props) => {
                 React.createElement(recharts_1.Area, { type: "monotone", dataKey: "pv", stackId: "1", stroke: "#82ca9d", fill: "#82ca9d" }),
                 React.createElement(recharts_1.Area, { type: "monotone", dataKey: "amt", stackId: "1", stroke: "#ffc658", fill: "#ffc658" })))));
 };
+const testwidget = (props) => {
+    const { model, action } = props;
+    let [total, setTotal] = React.useState(0);
+    React.useEffect(() => {
+        getData();
+    }, []);
+    function getData() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const res = yield props.uxpContext.executeAction(model, action, {}, { json: true });
+            if (res) {
+                setTotal(res);
+                console.log('Total Count:', res);
+            }
+            else {
+                console.error('Invalid response data format or empty array', res);
+            }
+        });
+    }
+    return (React.createElement(components_1.WidgetWrapper, null,
+        React.createElement("div", { className: "container-widget-ebd5609c-b712-4eb7-bf00-31173e4db3a0" },
+            React.createElement("h1", null, "Total Count"),
+            React.createElement("div", { className: "total-count" }, total))));
+};
 /**
  * Register as a Widget
  */
@@ -611,6 +634,34 @@ const SRChartWidget = (props) => {
         // minH: 12,
         // minW: 12
         }
+    }
+});
+(0, uxp_1.registerWidget)({
+    id: "testwidget",
+    widget: testwidget,
+    configs: {
+        layout: {
+        // w: 12,
+        // h: 12,
+        // minH: 12,
+        // minW: 12
+        },
+        props: [
+            {
+                name: "model",
+                label: "Model Name",
+                type: "text"
+            },
+            {
+                name: "action",
+                label: "Action Name",
+                type: "text"
+            }
+        ]
+    },
+    defaultProps: {
+        model: "Exam-Test-Model",
+        action: "test1"
     }
 });
 /**
@@ -896,7 +947,7 @@ module.exports = UXPComponents;
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"id":"ebd5609c-b712-4eb7-bf00-31173e4db3a0","author":"","widgets":[{"id":"sample2","name":"sample2","description":"A sample widget","icon":"","tags":[],"category":"","isTemplate":false},{"id":"srchart","name":"srchart","description":"Another chart widget","icon":"","tags":[],"category":"","isTemplate":false}],"sidebarLinks":[],"uis":[],"menuItems":[]}');
+module.exports = /*#__PURE__*/JSON.parse('{"id":"ebd5609c-b712-4eb7-bf00-31173e4db3a0","author":"","widgets":[{"id":"sample2","name":"sample2","description":"A sample widget","icon":"","tags":[],"category":"","isTemplate":false},{"id":"srchart","name":"srchart","description":"Another chart widget","icon":"","tags":[],"category":"","isTemplate":false},{"id":"testwidget","name":"testwidget","description":"A sample test widget","icon":"","tags":[],"category":"","isTemplate":false}],"sidebarLinks":[],"uis":[],"menuItems":[]}');
 
 /***/ }),
 

@@ -1,0 +1,24 @@
+{
+    "id": "4ef9cfc9-5c38-4b0a-981a-f5a8ca0cb1b6",
+    "author": "",
+    "widgets": [
+        {
+            "id": "test1",
+            "name": "test1",
+            "description": "A sample widget",
+            "icon": "",
+            "tags":[],
+            "category":"",
+            "isTemplate": false
+        }
+    ],
+    "sidebarLinks": [
+        
+    ],
+    "uis": [
+       
+    ],
+    "menuItems": [
+        
+    ]
+}

@@ -2,6 +2,7 @@
     position: relative;
 // padding-top: 80px;
 
+
 .uxp-widget-title-bar {
     &.sr-header {
         position: absolute;
@@ -31,3 +32,46 @@
 }
 
 }
+
+
+
+
+
+.container-widget-ebd5609c-b712-4eb7-bf00-31173e4db3a0 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9; /* Light gray background */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the container */
+    width: 300px; /* Set a fixed width */
+    margin: 20px auto; /* Center the container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h1 {
+    font-family: 'Arial', sans-serif; /* Clean font */
+    font-size: 24px; /* Adjust font size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Dark text for contrast */
+    margin-bottom: 10px; /* Space between the heading and content */
+    text-align: center; /* Center the text */
+}
+
+.total-count {
+    font-family: 'Courier New', Courier, monospace; /* Unique monospace font */
+    font-size: 32px; /* Larger font size for emphasis */
+    font-weight: bold; /* Emphasize the count */
+    color: #007BFF; /* Bright blue for emphasis */
+    background-color: #e7f3ff; /* Light blue background for contrast */
+    padding: 10px 20px; /* Padding around the count */
+    border-radius: 5px; /* Slightly rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center; /* Center the text */
+    margin-top: 10px; /* Space above the count */
+}
+
+
+

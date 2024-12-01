@@ -1,0 +1,39 @@
+{
+    "id": "434131dc-18c1-4e3c-953c-87cdca9b07e6",
+    "author": "",
+    "widgets": [
+        {
+            "id": "test1",
+            "name": "test1",
+            "description": "A sample widget",
+            "icon": "",
+            "tags":[]
+            "category":"",
+            "isTemplate": true/false // this will mark the widget as a template 
+        }
+    ],
+    "sidebarLinks": [
+        {
+            "id": "test1Link",
+            "label": "",
+            "description": "",
+            "target": "",
+            "icon": "",
+            "roles":[]
+        }
+    ],
+    "uis": [
+        {
+            "id": "test1Link",
+            "label":"",
+            "description": "",
+            "roles": []
+        }
+    ],
+    "menuItems": [
+        {
+            "id": "test1Link",
+            "title": "test1"
+        }
+    ]
+}

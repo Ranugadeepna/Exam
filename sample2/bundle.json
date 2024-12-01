@@ -19,6 +19,16 @@
             "tags":[],
             "category":"",
             "isTemplate": false
+        },
+        {
+            "id": "testwidget",
+            "name": "testwidget",
+            "description": "A sample test widget",
+            "icon": "",
+            "tags":[],
+            "category":"",
+            "isTemplate": false
+            
         }
     ],
     "sidebarLinks": [

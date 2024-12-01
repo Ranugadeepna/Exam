@@ -12,12 +12,13 @@ export interface IWidgetProps {
     instanceId?: string
     designer?: IWDDesignModeProps,
     uiProps?: any
+
 }
 
 
 const Sample2Widget: React.FunctionComponent<IWidgetProps> = (props) => {
 
-    let [data,setData] =React.useState([])
+    // let [data,setData] =React.useState([])
 
     // let data=[
     //     { id: 1, name: 'John Doe',city:'norve' },
@@ -31,19 +32,21 @@ const Sample2Widget: React.FunctionComponent<IWidgetProps> = (props) => {
    
     // ];
 
-    React.useEffect(() => {
-        // getData();
-    }, []);
+    // React.useEffect(() => {
+    //     // getData();
+    // }, []);
 
     async function getData(max: number, lastToken: string) {
         return new Promise<{ items: any[], pageToken: string }>((done, nope) => {
             let last = 0;
+            
             if (lastToken) last = Number(lastToken);
     
-        props.uxpContext.executeAction("Exam-Test-Model", "getdata", {}, {json:true})
-        .then(res=>{
-            // setData(res.result);
-            done({items: res.result, pageToken: (last + res.result.length).toString() });
+        props.uxpContext.executeAction("Exam-Test-Model", "getdata", {max:max,last:last}, {json:true})
+        .then(response=>{
+          
+            done({items: response.result2, pageToken: (last + response.result2.length).toString() });
+            console.log(response.result.length)
         })
         .catch(e=>{
             console.log(e);
@@ -56,6 +59,7 @@ const Sample2Widget: React.FunctionComponent<IWidgetProps> = (props) => {
         return (
             <div className="sr-item" >
                 
+               
                 <div className="item name">{item.name}</div>
                 <div className="item email">{item.email}</div>
                 <div className="item adrress">{item.address}</div>
@@ -77,7 +81,7 @@ const Sample2Widget: React.FunctionComponent<IWidgetProps> = (props) => {
              <DataList
              data={getData}
              renderItem={renderItem}
-             pageSize={10}
+             pageSize={20}
              />
    
 
@@ -183,6 +187,44 @@ const SRChartWidget: React.FunctionComponent<IWidgetProps> = (props) =>{
     )
 }
 
+export interface MyWidgetProps extends IWidgetProps {
+    model: string,
+    action: string
+   
+    
+}
+
+
+const testwidget:React.FunctionComponent<MyWidgetProps> = (props) => { 
+    
+    const { model, action } = props;
+
+    let [total,setTotal]=React.useState(0); 
+    React.useEffect(() => {
+        getData();
+    }, []);  
+
+    async function getData() {
+        
+            const res = await props.uxpContext.executeAction(model,action, {}, {json: true});
+            if (res) {
+                setTotal(res);
+                console.log('Total Count:', res);
+            } else {
+                console.error('Invalid response data format or empty array', res);
+            }
+    }
+
+    return (
+
+       <WidgetWrapper>
+        <div className="container-widget-ebd5609c-b712-4eb7-bf00-31173e4db3a0">
+            <h1>Total Count</h1>
+            <div className="total-count">{total}</div>
+        </div>
+       </WidgetWrapper>
+    );
+};
 /**
  * Register as a Widget
  */
@@ -210,6 +252,36 @@ registerWidget({
             // minW: 12
         }
     }
+});
+
+registerWidget({
+    id: "testwidget",
+    widget: testwidget,
+    configs: {
+        layout: {
+            // w: 12,
+            // h: 12,
+            // minH: 12,
+            // minW: 12
+        },
+        props:[
+            {
+                name: "model",
+                label: "Model Name",
+                type: "text"
+            },
+            {
+                name: "action",
+                label: "Action Name",
+                type: "text"
+            }
+        ]   
+    },
+    defaultProps:{
+        model: "Exam-Test-Model",
+        action: "test1"
+    }
+    
 });
 
 
